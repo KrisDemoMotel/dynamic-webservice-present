@@ -15,7 +15,7 @@ jobs:
       - run:
           name: "Check for status 200."
           command: |
-            webService=$(curl -o /dev/null -s -w "%{http_code}\n" https://www.google.com)
+            webService=$(curl -o /dev/null -s -w "%{http_code}\n" https://www.googleeeeeeerewafasdfse.com)
             if [ $webService -eq 200 ]; 
             then  cp .circleci/webserviceOkConfig.yml .circleci/nextConfig.yml
             fi
