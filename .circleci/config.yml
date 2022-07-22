@@ -1,0 +1,28 @@
+version: 2.1
+
+setup: true
+
+orbs:
+  continuation: circleci/continuation@0.3.1
+
+jobs:
+  say-hello:
+    docker:
+      - image: cimg/base:stable
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: "Check for status 200."
+          command: |
+            webService=$(curl -o /dev/null -s -w "%{http_code}\n" https://www.google.com)
+            if [ $webService -eq 200 ]; 
+            then  cp .circelci/webserviceOkConfig.yml .circleci/nextConfig.yml
+            fi
+            cat .circleci/nextConfig.yml
+      - continuation/continue:
+          configuration_path: .circleci/newConfig.yml
+workflows:
+  say-hello-workflow:
+    jobs:
+      - say-hello
