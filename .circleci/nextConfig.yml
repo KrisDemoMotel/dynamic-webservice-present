@@ -1,0 +1,16 @@
+version: 2.1
+
+jobs:
+  webDeterminism:
+    docker:
+      - image: cimg/base:stable
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          command: echo "web service did not return 200"
+
+workflows:
+  webnotokay:
+    jobs:
+      - webDeterminism
