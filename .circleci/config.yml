@@ -17,12 +17,12 @@ jobs:
           command: |
             webService=$(curl -o /dev/null -s -w "%{http_code}\n" https://www.google.com)
             if [ $webService -eq 200 ]; 
-            then  cp .circelci/webserviceOkConfig.yml .circleci/nextConfig.yml
+            then  cp .circleci/webserviceOkConfig.yml .circleci/nextConfig.yml
             fi
             cat .circleci/nextConfig.yml
       - continuation/continue:
           configuration_path: .circleci/nextConfig.yml
 workflows:
-  say-hello-workflow:
+  checkWebStatus:
     jobs:
-      - say-hello
+      - checkWebStatus
